@@ -18,4 +18,20 @@ public class Destination {
 		return path;
 	}
 	
+	@Override
+	public String toString() {
+		return "(" + order + ") " + path;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Destination) {
+			if (((Destination) obj).getPath() == this.path) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 }
