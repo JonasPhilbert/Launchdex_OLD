@@ -12,10 +12,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import model.Destination;
+import model.FileDestination;
 
 public class Storage {
 	
-	private static ArrayList<Destination> destinations = new ArrayList<Destination>();
+	private static ArrayList<FileDestination> destinations = new ArrayList<FileDestination>();
 
 	public static void load() throws Exception {
 		File f = new File("destinations.json");
@@ -41,7 +42,7 @@ public class Storage {
     	destinations = gson.fromJson(sb.toString(), listType);
     	
     	if (destinations == null)
-    		destinations = new ArrayList<Destination>();
+    		destinations = new ArrayList<FileDestination>();
     	
 		fr.close();
 	}
@@ -59,7 +60,7 @@ public class Storage {
 		}
 	}
 	
-	public static void addDestination(Destination destination) {
+	public static void addDestination(FileDestination destination) {
 		if (destinations.contains(destination))
 			return;
 		
@@ -72,8 +73,8 @@ public class Storage {
 		save();
 	}
 	
-	public static ArrayList<Destination> getDestinations(){
-		return new ArrayList<Destination>(destinations);
+	public static ArrayList<FileDestination> getDestinations(){
+		return new ArrayList<FileDestination>(destinations);
 	}
 	
 }

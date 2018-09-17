@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Destination;
+import model.FileDestination;
 import storage.Storage;
 
 //@SuppressWarnings("restriction")
@@ -67,7 +68,7 @@ public class MainApp extends Application {
     }
     
     private TextField txfQuery;
-    private ListView<String> lvwDestinations;
+    private ListView<Destination> lvwDestinations;
 
     private void buildPane(GridPane pane) {
     	builTextField(pane);
@@ -116,13 +117,26 @@ public class MainApp extends Application {
 					}
 				});
 				
+				MenuItem addItem = new MenuItem("Save as Shortcut");
+				addItem.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						addDestinationStage = new AddDestinationStage("Add Destination", stage, txfQuery.getText().substring(0, txfQuery.getText().length()));
+					}
+				});
+				
 				MenuItem editItem = new MenuItem("Edit");
 				editItem.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						editDestinationStage = new EditDestinationStage("Edit Destination", stage, lvwDestinations.getSelectionModel().getSelectedItem());
-						editDestinationStage.showAndWait();
-						reloadListView();
+						Destination selected = lvwDestinations.getSelectionModel().getSelectedItem();
+						System.out.println("yeeeep");
+						if (selected instanceof FileDestination) {
+							System.out.println("Yep");
+							editDestinationStage = new EditDestinationStage("Edit Destination", stage, (FileDestination) selected);
+							editDestinationStage.showAndWait();
+							reloadListView();	
+						}
 					}
 				});
 				
@@ -134,7 +148,11 @@ public class MainApp extends Application {
 					}
 				});
 				
-				cm.getItems().addAll(pathItem, editItem, removeItem);
+				if (txfQuery.getText().charAt(0) == '@') {
+					cm.getItems().addAll(pathItem, addItem);
+				} else {
+					cm.getItems().addAll(pathItem, editItem, removeItem);
+				}
 				cm.show(stage);
 			}
 		});

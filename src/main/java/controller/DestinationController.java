@@ -2,16 +2,16 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import model.Destination;
+import model.FileDestination;
 import storage.Storage;
 
 public class DestinationController {
 	
-	public static ArrayList<Destination> orderMatch(String searchChars) {
-		ArrayList<Destination> destinations = Storage.getDestinations();
+	public static ArrayList<FileDestination> orderMatch(String searchChars) {
+		ArrayList<FileDestination> destinations = Storage.getDestinations();
 		
-		destinations.sort(new Comparator<Destination>() {
-			public int compare(Destination d1, Destination d2) {
+		destinations.sort(new Comparator<FileDestination>() {
+			public int compare(FileDestination d1, FileDestination d2) {
 				return stringCharMatch(d2.getName(), searchChars) - stringCharMatch(d1.getName(), searchChars);
 			};
 			

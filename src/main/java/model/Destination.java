@@ -2,32 +2,25 @@ package model;
 
 public class Destination {
 
-//	private int order;
-	private String name;
 	private String path;
+	private boolean runnable;
 	
-	public Destination(String name, String path) {
-//		this.order = order;
-		this.name = name;
+	public Destination(String path, boolean runnable) {
 		this.path = path;
+		this.runnable = runnable;
 	}
-	
-//	public int getOrder() {
-//		return order;
-//	}
 	
 	public String getPath() {
 		return path;
 	}
 	
-	public String getName() {
-		return name;
+	public boolean isRunnable() {
+		return runnable;
 	}
 	
 	@Override
 	public String toString() {
-//		return "(" + order + ") " + path;
-		return name;
+		return path;
 	}
 	
 	@Override

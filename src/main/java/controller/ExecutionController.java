@@ -6,10 +6,17 @@ import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 
 import model.Destination;
+import model.FileDestination;
 
 public class ExecutionController {
 
 	public static InputStream execDestination(Destination destination) {
+		if (destination instanceof Destination) {
+			if (!destination.isRunnable()) {
+				return null;
+			}
+		}
+		
 		try {
 			return exec(destination.getPath());
 		} catch (Exception e) {
@@ -32,14 +39,14 @@ public class ExecutionController {
 		ArrayList<Destination> result = new ArrayList<>();
 		
 		if (query.length() <= 3) {
-			result.add(new Destination("Search query too short...", "Search query too short..."));
+			result.add(new Destination("Search query too short...", false));
 			return result;
 		}
 		
 		try {
 			ArrayList<String> queryResult = (ArrayList<String>) IOUtils.readLines(exec("es", query), "UTF-8");
 			for (String s : queryResult) {
-				result.add(new Destination(s, s));
+				result.add(new Destination(s, true));
 			}
 		} catch (Exception e) {
 			System.out.println("Everything Search Execution Error: " + e.getMessage());

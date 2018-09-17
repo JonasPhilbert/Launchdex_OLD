@@ -12,13 +12,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Destination;
+import model.FileDestination;
 import storage.Storage;
 
 public class EditDestinationStage extends Stage {
 
-	private Destination destination;
+	private FileDestination destination;
 	
-    public EditDestinationStage(String title, Stage owner, Destination destination) {
+    public EditDestinationStage(String title, Stage owner, FileDestination destination) {
     	this.destination = destination;
     	
         initOwner(owner);
@@ -67,7 +68,7 @@ public class EditDestinationStage extends Stage {
     	File f = new File(txfPath.getText());
     	if (f.exists()) {
     		Storage.removeDestination(destination);
-    		Storage.addDestination(new Destination(txfName.getText(), txfPath.getText()));
+    		Storage.addDestination(new FileDestination(txfName.getText(), txfPath.getText()));
     		this.close();
     	} else {
     		lblErr.setText("Invalid path.");

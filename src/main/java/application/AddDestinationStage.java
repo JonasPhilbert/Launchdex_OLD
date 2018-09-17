@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Destination;
+import model.FileDestination;
 import storage.Storage;
 
 public class AddDestinationStage extends Stage {
@@ -66,7 +67,7 @@ public class AddDestinationStage extends Stage {
     private void btnAddAction() {
     	File f = new File(txfPath.getText());
     	if (f.exists()) {
-    		Storage.addDestination(new Destination(txfName.getText(), txfPath.getText()));
+    		Storage.addDestination(new FileDestination(txfName.getText(), txfPath.getText()));
     		this.close();
     	} else {
     		lblErr.setText("Invalid path.");
