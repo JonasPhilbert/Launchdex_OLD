@@ -1,70 +1,22 @@
 [
   {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
+    "name": "Notepad++",
+    "path": "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
   },
   {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
+    "name": "WinDirStat",
+    "path": "C:\\Program Files (x86)\\WinDirStat\\windirstat.exe"
   },
   {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
+    "name": "PDFSam",
+    "path": "C:\\Program Files (x86)\\PDFsam Basic\\pdfsam.exe"
   },
   {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
+    "name": "Chrome",
+    "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
   },
   {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
-  },
-  {
-    "order": 0,
-    "path": "C:\\Program Files\\Git\\git-bash.exe"
-  },
-  {
-    "order": 1,
-    "path": "C:\\M.E.S.S\\Bikkel Milleder.zip"
+    "name": "GOG",
+    "path": "C:\\Program Files (x86)\\GOG Galaxy\\GalaxyClient.exe"
   }
 ]

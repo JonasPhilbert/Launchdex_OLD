@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import com.google.gson.Gson;
@@ -38,26 +39,36 @@ public class Storage {
 		
     	Type listType = new TypeToken<ArrayList<Destination>>() {}.getType();
     	destinations = gson.fromJson(sb.toString(), listType);
-		
+    	
+    	if (destinations == null)
+    		destinations = new ArrayList<Destination>();
+    	
 		fr.close();
 	}
 	
-	public static void save() throws Exception {
-		FileWriter fw = new FileWriter("destinations.json");
-		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		
-		fw.write(gson.toJson(destinations));
-		fw.close();
+	public static void save() {		
+		try {
+			FileWriter fw = new FileWriter("destinations.json");
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			
+			fw.write(gson.toJson(destinations));
+			fw.close();
+		} catch (IOException e) {
+			System.out.println("Failed to save:");
+			e.printStackTrace();
+		}
 	}
 	
-	public static void addDestination(Destination d) throws Exception {
-		destinations.add(d);
+	public static void addDestination(Destination destination) {
+		if (destinations.contains(destination))
+			return;
+		
+		destinations.add(destination);
 		save();
 	}
 	
-	public static void removeDestination(Destination d) throws Exception {
-		destinations.remove(d);
+	public static void removeDestination(Destination destination) {
+		destinations.remove(destination);
 		save();
 	}
 	
