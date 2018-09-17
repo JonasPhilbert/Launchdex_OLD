@@ -29,10 +29,6 @@ public class MainApp extends Application {
 	
     public static void main(String[] args) throws Exception {
     	Storage.load();
-//    	Storage.addDestination(new Destination("Notepad++", "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"));
-//    	Storage.addDestination(new Destination("WinDirStat", "C:\\Program Files (x86)\\WinDirStat\\windirstat.exe"));
-//    	Storage.addDestination(new Destination("PDFSam", "C:\\Program Files (x86)\\PDFsam Basic\\pdfsam.exe"));
-//    	Storage.addDestination(new Destination("GOG", "C:\\Program Files (x86)\\GOG Galaxy\\GalaxyClient.exe"));
         Application.launch(args);
     }
     
@@ -48,7 +44,7 @@ public class MainApp extends Application {
     	root.setPadding(new Insets(10d));
     	root.setHgap(10d);
     	root.setVgap(10d);
-        root.setPrefSize(400, 600);
+        root.setPrefSize(400, 400);
         buildPane(root);
         Scene scene = new Scene(root);
 
@@ -67,17 +63,22 @@ public class MainApp extends Application {
     }
     
     private TextField txfQuery;
-    private ListView<String> lvwDestinations;
+    private ListView<Destination> lvwDestinations;
 
     private void buildPane(GridPane pane) {
-    	builTextField(pane);
-    	builListView(pane);
+    	buildTextField(pane);
+    	buildListView(pane);
     }
     
-    private void builTextField(GridPane pane) {
+    private void buildTextField(GridPane pane) {
     	txfQuery = new TextField("Search Query");
     	txfQuery.setMinWidth(400);
     	txfQuery.textProperty().addListener((observable, oldValue, newValue) -> {
+    		if (newValue.isEmpty()) {
+    			reloadListView();
+    			return;
+    		}
+    		
     		lvwDestinations.getItems().removeAll(lvwDestinations.getItems());
     		if (txfQuery.getText().charAt(0) == '@') {
     			lvwDestinations.getItems().addAll(ExecutionController.everythingSearch(txfQuery.getText().substring(1, txfQuery.getText().length())));
@@ -92,7 +93,7 @@ public class MainApp extends Application {
     	pane.add(txfQuery, 0, 0);
     }
     
-    private void builListView(GridPane pane) {
+    private void buildListView(GridPane pane) {
     	lvwDestinations = new ListView<>();
     	lvwDestinations.getItems().addAll(Storage.getDestinations());
     	lvwDestinations.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -116,6 +117,15 @@ public class MainApp extends Application {
 					}
 				});
 				
+				MenuItem addItem = new MenuItem("Save as Shortcut");
+				addItem.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						addDestinationStage = new AddDestinationStage("Add Destination", stage, lvwDestinations.getSelectionModel().getSelectedItem().getPath());
+						addDestinationStage.showAndWait();
+					}
+				});
+				
 				MenuItem editItem = new MenuItem("Edit");
 				editItem.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
@@ -134,7 +144,11 @@ public class MainApp extends Application {
 					}
 				});
 				
-				cm.getItems().addAll(pathItem, editItem, removeItem);
+				if (txfQuery.getText().charAt(0) == '@') {
+					cm.getItems().addAll(pathItem, addItem);
+				} else {
+					cm.getItems().addAll(pathItem, editItem, removeItem);	
+				}
 				cm.show(stage);
 			}
 		});
@@ -149,6 +163,7 @@ public class MainApp extends Application {
 				stage.setIconified(false);
 				stage.toFront();
 				
+				txfQuery.requestFocus();
 				txfQuery.selectAll();
 			}
 		});
@@ -166,8 +181,8 @@ public class MainApp extends Application {
     }
     
     private void txfAction() {
-    	backView();    	
     	ExecutionController.execDestination(lvwDestinations.getItems().get(0));
+    	backView();    	
     }
     
     private void reloadListView() {

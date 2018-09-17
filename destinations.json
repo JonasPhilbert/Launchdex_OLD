@@ -8,15 +8,19 @@
     "path": "C:\\Program Files (x86)\\WinDirStat\\windirstat.exe"
   },
   {
-    "name": "PDFSam",
-    "path": "C:\\Program Files (x86)\\PDFsam Basic\\pdfsam.exe"
-  },
-  {
     "name": "Chrome",
     "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
   },
   {
     "name": "GOG",
     "path": "C:\\Program Files (x86)\\GOG Galaxy\\GalaxyClient.exe"
+  },
+  {
+    "name": "Firefoxx",
+    "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+  },
+  {
+    "name": "PDFSamm",
+    "path": "C:\\Program Files (x86)\\PDFsam Basic\\pdfsam.exe"
   }
 ]

@@ -31,9 +31,9 @@ public class AddDestinationStage extends Stage {
         setTitle(title);
         GridPane pane = new GridPane();
         pane.setGridLinesVisible(false);
-        pane.setPadding(new Insets(20));
-        pane.setHgap(10);
-        pane.setVgap(10);
+        pane.setPadding(new Insets(10));
+        pane.setHgap(5);
+        pane.setVgap(5);
         initContent(pane);
 
         Scene scene = new Scene(pane);
@@ -46,10 +46,10 @@ public class AddDestinationStage extends Stage {
 
     private void initContent(GridPane pane) {
     	txfName = new TextField("Name");
-    	pane.add(txfName, 0, 0);
+    	pane.add(txfName, 0, 0, 2, 1);
     	
-    	txfPath = new TextField("C:\\PATH\\TO\\FILE");
-    	pane.add(txfPath, 0, 1);
+    	txfPath = new TextField(path);
+    	pane.add(txfPath, 0, 1, 2, 1);
     	
     	btnAdd = new Button("Add");
     	btnAdd.setOnAction(event -> btnAddAction());
@@ -61,6 +61,8 @@ public class AddDestinationStage extends Stage {
     	
     	lblErr = new Label("");
     	pane.add(lblErr, 0, 3);
+    	
+    	txfName.requestFocus();
     }
     
     private void btnAddAction() {
